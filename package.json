@@ -2,6 +2,7 @@
   "name": "25-puzzle",
   "version": "1.0.0",
   "license": "MIT",
+  "private": true,
   "dependencies": {
     "express": "^4.13.4"
   }
