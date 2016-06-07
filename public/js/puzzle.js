@@ -2,7 +2,6 @@ var puzzle = (function() {
   'use strict';
   var
     size = 5,
-    tiles = [],
     createTable = function($container) {
       var table = $('<table>').appendTo($container);
       // size * size の分だけtd要素を作成する。
@@ -11,21 +10,17 @@ var puzzle = (function() {
         _(size).times(function(j) {
           var 
             index = i * size + j,
-            td = $('<td>').addClass('tile').appendTo(tr),
-            dom_td = td[0];
-          
-          dom_td.index = index;
-          dom_td.value = index;
-          dom_td.textContent = index == 0 ? "" : index;
-          dom_td.onclick = function(e) {
-            swap(e.srcElement.index);
-          };
-          
-          tiles.push(dom_td);
+            td = $('<td>').addClass('tile').appendTo(tr);
+            td.prop('index', index);
+            td.prop('value', index);
+            td.prop('textContent', index == 0 ? "" : index);
+            td.on("click", function() {
+	            swap(this.index);
+            });	
         });
       });
       
-      // 適当な回数だけ入れ替えを行い、ランダムな配置にする。
+      // 適当な回数だけユーザー操作をシュミレートすることで、ランダムな配置にする。
       _(5000).times(function() {
         swap(_.random(size * size - 1));
       });
@@ -33,22 +28,27 @@ var puzzle = (function() {
   
   function swap(i) {
     var swapBody = function(i, j) {
-      var tmp = tiles[i].value;
-      tiles[i].textContent = tiles[j].textContent;
-      tiles[i].value = tiles[j].value;
-      tiles[j].textContent = tmp;
-      tiles[j].value = tmp;
+      // i番目とj番目のtd要素の表示内容を入れ替える。
+      var 
+        before = $('.tile').eq(i),
+        after = $('.tile').eq(j),
+        tmp = before.prop('value'); 
+        
+      before.prop('textContent', after.prop('textContent'));
+      before.prop('value', after.prop('value'));
+      after.prop('textContent', tmp);
+      after.prop('value', tmp);
     }
     
     // 上下左右の順に空タイルが存在するかチェックし、
     // 存在していれば位置を入れ替える。
-    if(i - size >= 0 && tiles[i - size].value == 0) {
+    if(i - size >= 0 && $('.tile').eq(i - size).prop('value') == 0) {
       swapBody(i, i - size);
-    } else if(i + size < size * size && tiles[i + size].value == 0) {
+    } else if(i + size < size * size && $('.tile').eq(i + size).prop('value') == 0) {
       swapBody(i, i + size);
-    } else if(i % size != 0 && tiles[i - 1].value == 0) {
+    } else if(i % size != 0 && $('.tile').eq(i - 1).prop('value') == 0) {
       swapBody(i, i - 1);
-    } else if(i % size != size - 1 && tiles[i + 1].value == 0) {
+    } else if(i % size != size - 1 && $('.tile').eq(i + 1).prop('value') == 0) {
       swapBody(i, i + 1);
     }
   }
