@@ -9,14 +9,14 @@ var puzzle = (function() {
         var tr = $('<tr>').appendTo(table);
         _(size).times(function(j) {
           var 
-            index = i * size + j,
-            td = $('<td>').addClass('tile').appendTo(tr);
-            td.prop('index', index);
-            td.prop('value', index);
-            td.prop('textContent', index == 0 ? "" : index);
-            td.on("click", function() {
-	            swap(this.index);
-            });	
+            index = i * size + j;
+            $('<td>').addClass('tile').appendTo(tr)
+              .prop('index', index)
+              .prop('value', index)
+              .prop('textContent', index == 0 ? "" : index)
+              .on("click", function() {
+	              swap(this.index);
+              });	
         });
       });
       
@@ -32,12 +32,14 @@ var puzzle = (function() {
       var 
         before = $('.tile').eq(i),
         after = $('.tile').eq(j),
-        tmp = before.prop('value'); 
+        tmp_value = before.prop('value'); 
         
-      before.prop('textContent', after.prop('textContent'));
-      before.prop('value', after.prop('value'));
-      after.prop('textContent', tmp);
-      after.prop('value', tmp);
+      before
+        .prop('textContent', after.prop('textContent'))
+        .prop('value', after.prop('value'));
+      after
+        .prop('textContent', tmp_value)
+        .prop('value', tmp_value);
     }
     
     // 上下左右の順に空タイルが存在するかチェックし、
