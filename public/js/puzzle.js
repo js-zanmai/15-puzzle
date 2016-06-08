@@ -8,15 +8,14 @@ var puzzle = (function() {
       _(size).times(function(i) {
         var tr = $('<tr>').appendTo(table);
         _(size).times(function(j) {
-          var 
-            index = i * size + j;
-            $('<td>').addClass('tile').appendTo(tr)
-              .prop('index', index)
-              .prop('value', index)
-              .prop('textContent', index == 0 ? "" : index)
-              .on("click", function() {
-	              swap(this.index);
-              });	
+          var index = i * size + j;
+          $('<td>').addClass('tile').appendTo(tr)
+            .prop('index', index)
+            .prop('value', index)
+            .prop('textContent', index == 0 ? "" : index)
+            .on("click", function() {
+	            swap(this.index);
+            });	
         });
       });
       
