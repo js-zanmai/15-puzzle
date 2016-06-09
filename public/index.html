@@ -4,16 +4,26 @@
   <title>25 puzzle</title>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="css/puzzle.css" type="text/css"/>
-  <script src="js/lib/jquery-2.2.4.js"></script>
-  <script src="js/lib/underscore-1.8.3.js"></script>
+  <script type="text/javascript" src="js/lib/jquery-2.2.4.js"></script>
+  <script type="text/javascript" src="js/lib/underscore-1.8.3.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/vue/1.0.24/vue.min.js"></script>
   <script src="js/puzzle.js"></script>
   <script>
     $(function() {
-      puzzle.init($('#container'));
+      puzzle.init();
     });
   </script>
 </head>
 <body>
+  <div id="setting">
+    <nav>現在のサイズ：{{ size }}×{{ size }}</nav>
+    <span>サイズを変更する</span>
+    <select v-model="size">
+      <option>4</option>
+      <option>5</option>
+      <option>6</option>
+    </select>
+  </div>
   <div id="container"></div>
 </body>
 </html>
