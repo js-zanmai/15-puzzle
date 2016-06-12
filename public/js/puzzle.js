@@ -20,6 +20,32 @@ var puzzle = (function() {
         createTable();
         randomizeTiles();
       });
+
+      $('body').on('keyup', function (event) {
+        for (var empty = 0; empty < size * size; empty++) {
+          if ($('.tile').eq(empty).prop('value') == 0) {
+            switch (event.key) {
+              case "ArrowDown":
+                if (empty - size >= 0) {
+                  swap(empty - size);
+                }
+                break;
+              case "ArrowUp":
+                if (empty + size < size * size) {
+                  swap(empty + size);
+                }
+                break;
+              case "ArrowLeft":
+                swap(empty + 1);
+                break;
+              case "ArrowRight":
+                swap(empty - 1);
+                break;
+            }
+            break;
+          }
+        }
+      });
     };
   
   function createTable() {
