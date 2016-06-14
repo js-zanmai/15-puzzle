@@ -10,7 +10,7 @@
     "vue": "^1.0.24"
   },
   "scripts": {
-    "build": "webpack ./public/js/puzzle.js ./public/bundle.js"
+    "build": "webpack ./public/js/puzzle.js ./public/bundle.js --optimize-minimize --devtool source-map"
   },
   "devDependencies": {
     "webpack": "^1.13.1"
