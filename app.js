@@ -11,5 +11,5 @@ app.get('/', function(req, res) {
 });
 
 app.listen(3000, function () {
-  console.log('25 puzzle app listening on port 3000!');
+  console.log('15 puzzle app listening on port 3000!');
 });
