@@ -1,5 +1,6 @@
 # 25-puzzle
 usage  
-1. npm install  
-2. npm run build  
-3. node app  
+1. npm install webpack -g
+2. npm install  
+3. webpack  
+4. node app  
